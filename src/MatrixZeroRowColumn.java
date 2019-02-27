@@ -1,3 +1,17 @@
+/*
+ * Practices used are as follows
+ * 1) Functions should be small
+ * 2) Functions should do only one thing
+ * 3) Function name should describe what it is ment for
+ * 4) Arguments should be less in number(may be < 2) or
+ *      probably your function is doing more than one thing
+ * 5) Should not use output arguments
+ * 6) Function at most should have one return statement
+ * 7) Statements in a function should be at same level of abstraction
+ * 8) Descriptive names
+ */
+
+
 import java.util.logging.Logger;
 import java.util.Scanner;
 
