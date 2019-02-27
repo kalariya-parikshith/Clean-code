@@ -9,6 +9,10 @@
  * 6) Function at most should have one return statement
  * 7) Statements in a function should be at same level of abstraction
  * 8) Descriptive names
+ *
+ * space complexity is O(M x N)
+ * time  complexity is O(M x N)
+ ** where M is number of rows and N is number of columns
  */
 
 
@@ -102,12 +106,12 @@ public class MatrixZeroRowColumn {
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int noOfRows = scanner.nextInt();
-        int noOfColumns = scanner.nextInt();
-        int[][] matrix = new int[noOfRows][noOfColumns];
+        int numberOfRows = scanner.nextInt();
+        int numberOfColumns = scanner.nextInt();
+        int[][] matrix = new int[numberOfRows][numberOfColumns];
 
-        for(int rowNumber = 0; rowNumber < noOfRows; rowNumber++) {
-            for(int columnNumber = 0; columnNumber < noOfColumns; columnNumber++) {
+        for(int rowNumber = 0; rowNumber < numberOfRows; rowNumber++) {
+            for(int columnNumber = 0; columnNumber < numberOfColumns; columnNumber++) {
                 matrix[rowNumber][columnNumber] = scanner.nextInt();
             }
         }
