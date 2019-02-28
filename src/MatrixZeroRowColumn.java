@@ -17,11 +17,9 @@
  */
 
 
-import java.util.logging.Logger;
 import java.util.Scanner;
 
 public class MatrixZeroRowColumn {
-    private static final Logger logger = Logger.getLogger("Row column zero");
 
     /*
      * Displays the given matrix
