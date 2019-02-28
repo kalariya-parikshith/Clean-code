@@ -52,4 +52,24 @@ public class TestCases {
         Assert.assertArrayEquals(expectedMatrix, actualMatrix);
     }
 
+    @Test
+    public void Test6(){
+        int[][] inputMatrix = {{}};
+
+        int[][] expectedMatrix = {{}};
+
+        int[][] actualMatrix = MatrixZeroRowColumn.setRowColumnZero(inputMatrix);
+        Assert.assertArrayEquals(expectedMatrix, actualMatrix);
+    }
+
+    @Test
+    public void Test7(){
+        int[][] inputMatrix = null;
+
+        int[][] expectedMatrix = null;
+
+        int[][] actualMatrix = MatrixZeroRowColumn.setRowColumnZero(inputMatrix);
+        Assert.assertArrayEquals(expectedMatrix, actualMatrix);
+    }
+
 }

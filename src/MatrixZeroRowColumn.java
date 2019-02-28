@@ -38,41 +38,102 @@ public class MatrixZeroRowColumn {
     }
 
     /*
-     * Makes entire row zero if matrix has any zero in that row
+     * checks if first row in the matrix has zero
      *
      * @param   matrix is a 2D array
-     * @param   rowZero array contains information about which rows should
-     *          be made entirely zero
+     *
+     * @return  true if first row has zero
+     *          false otherwise
      */
-    private static void makeRowsZero(int[][] matrix, boolean[] rowZero) {
-        for(int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
-            if(rowZero[rowNumber]) {
-                for(int columnIndex = 0; columnIndex < matrix[0].length; columnIndex++) {
-                    matrix[rowNumber][columnIndex] = 0;
+    private static boolean isFirstRowZero(int[][] matrix){
+        for(int columnNumber = 0; columnNumber < matrix[0].length; columnNumber++){
+            if(matrix[0][columnNumber] == 0){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /*
+     * checks if first column in the matrix has zero
+     *
+     * @param   matrix is a 2D array
+     *
+     * @return  true if first column has zero
+     *          false otherwise
+     */
+    private static boolean isFirstColumnZero(int[][] matrix) {
+
+        for(int rowNumber = 0; rowNumber < matrix.length; rowNumber++){
+            if(matrix[rowNumber][0] == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+     * Makes entire first row zero
+     *
+     * @param   matrix is a 2D array
+     */
+    private static void makeFirstRowZero(int[][] matrix) {
+        for(int columnNumber = 0; columnNumber < matrix[0].length; columnNumber++){
+            matrix[0][columnNumber] = 0;
+        }
+    }
+
+    /*
+     * Makes entire first column zero
+     *
+     * @param   matrix is a 2D array
+     */
+    private static void makeFirstColumnZero(int[][] matrix){
+        for(int rowNumber = 0; rowNumber < matrix.length; rowNumber++){
+            matrix[rowNumber][0] = 0;
+        }
+    }
+
+    /*
+     * if elements in the matrix are zero then with respective to its index
+     * first row and first column are set to zero
+     * Example:     input matrix    [ 1, 2, 4 ]
+     *                              [ 3, 0, 5 ]
+     *                              [ 6, 8, 1 ]
+     *
+     *              output matrix   [ 1, 0, 4 ]
+     *                              [ 0, 0, 5 ]
+     *                              [ 6, 8, 1 ]
+     */
+    private static void markZerosOnFirstRowColumn(int[][] matrix) {
+        for(int rowNumber = 1; rowNumber < matrix.length; rowNumber++) {
+            for(int columnNumber = 1; columnNumber < matrix[0].length; columnNumber++) {
+                if(matrix[rowNumber][columnNumber] == 0) {
+                    matrix[0][columnNumber] = 0;
+                    matrix[rowNumber][0] = 0;
                 }
             }
         }
     }
 
     /*
-     * Makes entire column zero if matrix has any zero in that column
+     * set elements to zero with respective to its marks zero row and column
      *
      * @param   matrix is a 2D array
-     * @param   colZero array contains information about which columns should
-     *          be made entirely zero
      */
-    private static void makeColumnsZero(int[][] matrix, boolean[] colZero){
-        for(int colNumber = 0; colNumber < matrix[0].length; colNumber++) {
-            if(colZero[colNumber]) {
-                for(int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
-                    matrix[rowIndex][colNumber] = 0;
+    private static void useMarkToSetElements(int[][] matrix){
+        for(int rowNumber = 1; rowNumber < matrix.length; rowNumber++) {
+            for(int columnNumber = 1; columnNumber < matrix[0].length; columnNumber++) {
+                if(matrix[rowNumber][0] == 0 || matrix[0][columnNumber] == 0) {
+                    matrix[rowNumber][columnNumber] = 0;
                 }
             }
         }
     }
 
     /*
-     * makes matrix entire row/column zero if there is any zero in that perticular row/column
+     * makes matrix entire row/column zero if there is any zero in that particular row/column
      *
      * @param   matrix is a 2D array
      *
@@ -80,22 +141,31 @@ public class MatrixZeroRowColumn {
      *          in that particular row/column
      */
     public static int[][] setRowColumnZero(int[][] matrix){
-        boolean[] rowZero = new boolean[matrix.length];
-        boolean[] colZero = new boolean[matrix[0].length];
-        for(int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
-            for(int columnNumber = 0; columnNumber < matrix[0].length; columnNumber++) {
-                if(matrix[rowNumber][columnNumber] == 0) {
-                    rowZero[rowNumber] = true;
-                    colZero[columnNumber] = true;
-                }
-            }
+
+        if(matrix == null){
+            return null;
         }
 
-        makeRowsZero(matrix, rowZero);
-        makeColumnsZero(matrix, colZero);
+        if(matrix[0].length == 0) {
+            int[][] emptyMatrix = {{}};
+            return emptyMatrix;
+        }
+
+        boolean firstRowIsZero = isFirstRowZero(matrix);
+        boolean firstColumnZero = isFirstColumnZero(matrix);
+
+        markZerosOnFirstRowColumn(matrix);
+        useMarkToSetElements(matrix);
+
+        if(firstRowIsZero){
+            makeFirstRowZero(matrix);
+        }
+
+        if(firstColumnZero){
+            makeFirstColumnZero(matrix);
+        }
 
         return matrix;
-
     }
 
     /*
@@ -116,7 +186,7 @@ public class MatrixZeroRowColumn {
             }
         }
 
-        int[][] matrixWithZeroedRowColumn = setRowColumnZero(matrix.clone());
+        int[][] matrixWithZeroedRowColumn = setRowColumnZero(matrix);
 
         displayMatrix(matrixWithZeroedRowColumn);
 
