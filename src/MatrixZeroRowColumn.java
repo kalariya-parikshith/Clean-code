@@ -10,6 +10,7 @@
  * 7) Statements in a function should be at same level of abstraction
  * 8) Descriptive names
  *
+ * auxiliary space complexity is O(1)
  * space complexity is O(M x N)
  * time  complexity is O(M x N)
  ** where M is number of rows and N is number of columns
